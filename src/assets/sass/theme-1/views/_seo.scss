@@ -1,0 +1,120 @@
+.seo-inner {
+  width: 80%;
+
+  .seo-body {
+   display: flex;
+  .form-list {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+ }
+
+ .form-list-layer {
+    background-color: #3d4350;
+    border-radius: 3px;
+    border: 1px solid #2c323c;
+    color: #6a7d92;
+    padding: 8px;
+  }
+
+  .form-tab {
+    .form-list__data {
+       display: flex;
+      justify-content: flex-end;
+      background-color: inherit;
+      border: inherit
+    }
+
+    button{
+      align-items: center;
+      display: flex;
+      font-size: em(18px);
+      font-weight: inherit;
+      justify-content: center;
+      width: 100px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+
+      @include breakpoint(hoverable) {
+        background-color: #6abfec;
+        border: 1px solid #329bd3;
+      }
+
+      &.active {
+        background-color: #329bd3;
+        border: 1px solid #329bd3;
+        color: white;
+      }
+    }
+  }
+
+  .tag-list-data {
+    .form-list__data {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+
+ .form-list__item .form-list__lbl {
+    color: #afb7ca;
+    font-weight: 700;
+    text-transform: uppercase;
+    vertical-align: top;
+  }
+
+  .input-wrap, .textarea-wrap, .select-list, .form-list__data, .tag-input, .tag-input input{
+    background-color: #444b58;
+    border-color: #323944;
+    border-radius: 3px;
+    border: 1px solid #272e3a;
+    color: #afb7ca;
+  }
+
+  .form-list__head {
+    background-color: #3d4350;
+    border: 1px solid #2c323c;
+  }
+
+  .tag-input-item {
+    background-color: #353b47;
+  }
+  
+  .textarea-wrap.no-resize textarea {
+    min-height: 300px;
+  }
+
+  .tag-list {
+    .form-list__data {
+      display: flex;
+    }
+
+    .add-tags {
+      min-width: 60px;
+
+      .ico-add {
+        margin-right: 5px;
+      }
+    }
+
+    .input-wrap {
+      min-width: inherit
+    }
+
+    .tag-list__container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .tag-input-item {
+      min-width: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

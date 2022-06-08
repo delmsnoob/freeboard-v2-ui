@@ -1,0 +1,23 @@
+$THEME-base-accent1: #d2d2d4;
+$THEME-base-bg: #222935;
+.nav {}
+
+.nav__item {
+  background-color: $THEME-base-bg;
+  &.is-active {
+    background-color:#7498fd;
+  }
+}
+
+.nav__main {
+  .is-active & {
+    color: $THEME-base-accent1;
+  }
+}
+
+.nav-sub__item {
+  &.is-active {
+    background-color: #7498fd;
+    color: #d2d2d4;
+  }
+}

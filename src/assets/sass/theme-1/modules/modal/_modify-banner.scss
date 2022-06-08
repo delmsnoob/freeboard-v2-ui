@@ -1,0 +1,34 @@
+.modify-banner-modal {
+  .select-list > select {
+    height: 33px;
+  }
+
+  // .is-button, .is-order, .is-image {
+  //   display: flex;
+  // }
+
+  // .form__item-content {
+  //   width: 100%;
+
+  //   &:not(:last-child) {
+  //     margin-right: 10px;
+  //   }
+  // }
+
+ 
+  .banner-featured {
+    .form-list__data {
+      display: flex;
+    }
+  }
+
+  .error {
+    width: 100%;
+    
+    .form-list__data {
+      align-items: center;
+      color: red;
+      justify-content: flex-end;
+    }
+  }
+}

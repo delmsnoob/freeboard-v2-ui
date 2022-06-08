@@ -1,0 +1,28 @@
+.banner-inner {
+  .main__toolbar {
+    display: flex;
+    
+    .searchbar {
+      flex: 1 1 auto;
+    }
+  }
+
+  .main__toolbar-item {
+    align-items: center;
+    display: flex;
+    margin-bottom: 4px;
+  }
+
+  .toolbar-status {
+    .select-list {
+      min-width: inherit;
+      width: 100px;
+    }
+  }
+
+ .no-data {
+   align-items: center;
+   display: flex;
+   justify-content: center;
+ }
+}

@@ -1,0 +1,203 @@
+.btn-default {
+  $THEME-bg: #fff;
+  $THEME-tx: #111;
+  $THEME-border: #dcdcdc;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      $THEME-bg: #f9f9f9;
+      background-color: $THEME-bg;
+    }
+  }
+}
+
+.btn-transparent {
+  background-color: $transparent !important;
+  border-color: $transparent !important;
+  padding: 0;
+
+  i {
+    font-size: 18px;
+  }
+}
+
+.btn-delete {
+  $THEME-bg: #af5852;
+  $THEME-border: #7d3f3b;
+  $THEME-tx: #711a1a;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: darken($THEME-bg, 3%);
+      color: darken($THEME-tx, 6%);
+    }
+  }
+}
+
+.btn-close {
+  color: #923d3d;
+}
+
+.btn-popup-close {
+  $THEME-tx: #b52b2b;
+
+  background-color: transparent;
+  color: $THEME-tx;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: inherit !important;
+    }
+  }
+}
+
+.btn-save {
+  $THEME-bg: #86a746;
+  $THEME-border: #495a26;
+  $THEME-tx: #4f632a;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: darken($THEME-bg, 5%);
+      color: darken($THEME-tx, 5%);
+    }
+  }
+}
+
+.btn-modify {
+  $THEME-bg: #353b47;
+  $THEME-border: #222935;
+  $THEME-tx: #ffffff;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: darken($THEME-bg, 5%);
+      color: darken($THEME-tx, 5%);
+    }
+  }
+}
+
+.btn-edit {
+  $THEME-bg: #86a746;
+  $THEME-border: #495a26;
+  $THEME-tx: #4f632a;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: darken($THEME-bg, 5%);
+      color: darken($THEME-tx, 5%);
+    }
+  }
+}
+
+.btn-cancel {
+  $THEME-bg: #b62a2b;
+  $THEME-border: #b62a2b;
+  $THEME-tx: #fff;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+  font-weight: bold;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: darken($THEME-bg, 5%);
+      color: darken($THEME-tx, 5%);
+    }
+  }
+}
+
+.btn-create {
+  $THEME-bg: #328bc7;
+  $THEME-tx: #164a6f;
+  $THEME-border: #2275af;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+  display: flex;
+  justify-content: center;
+  min-width: 70px;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      $THEME-bg: darken($THEME-bg, 3%);
+      background-color: $THEME-bg;
+    }
+  }
+}
+
+.btn-add {
+  $THEME-bg: #87d1d9;
+  $THEME-tx: #58979f;
+  $THEME-border: #7faeb4;
+
+  background-color: $THEME-bg;
+  border: 1px solid $THEME-border;
+  color: $THEME-tx;
+  font-weight: bold;
+
+  &:not(:disabled) {
+    @include breakpoint(hoverable) {
+      background-color: darken($THEME-bg, 3%);
+      color: darken($THEME-tx, 5%);
+    }
+  }
+}
+
+ .btn-logout {
+    $THEME-bg: #d45f72;
+    $THEME-tx: #d45f72;
+    $THEME-border: #d45f72;
+
+    background-color: $THEME-bg;
+    border: 1px solid $THEME-border;
+    color: $THEME-tx;
+    font-weight: bold;
+
+    &:not(:disabled) {
+      @include breakpoint(hoverable) {
+        background-color: darken($THEME-bg, 3%);
+        color: darken($THEME-tx, 5%);
+      }
+    }
+  }
+
+  .btn-refresh {
+    $THEME-bg: #0e9e70;
+    $THEME-border: #116e51;
+    $THEME-tx: #072c20;
+
+    background-color: $THEME-bg;
+    border: 1px solid $THEME-border;
+    color: $THEME-tx;
+
+    &:not(:disabled) {
+      @include breakpoint(hoverable) {
+        background-color: darken($THEME-bg, 5%);
+        color: darken($THEME-tx, 5%);
+      }
+    }
+  }
+

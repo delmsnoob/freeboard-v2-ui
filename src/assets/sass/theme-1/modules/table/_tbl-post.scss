@@ -1,0 +1,32 @@
+.tbl--post {
+  .table__td {
+    &.id {
+      width: 70px !important;
+    }
+
+    &.position {
+      width: 95px !important;
+    }
+
+    &.status {
+      width: 90px !important;
+    }
+
+    &.featured {
+      width: 75px !important;
+    }
+
+    &.sequence {
+      width: 100px !important;
+      .input-wrap {
+        min-width: inherit;
+      }
+    }
+  }
+
+  .toggle-wrap {
+    min-width: inherit;
+  }
+
+  
+}

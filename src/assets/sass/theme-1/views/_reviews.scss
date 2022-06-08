@@ -1,0 +1,30 @@
+.reviews-inner {
+  .main__toolbar {
+    display: flex;
+    
+    .searchbar {
+      flex: 1 1 auto;
+    }
+  }
+
+  .main__toolbar-item {
+    align-items: center;
+    display: flex;
+    margin-bottom: 4px;
+  }
+
+ .no-data {
+   align-items: center;
+   display: flex;
+   justify-content: center;
+ }
+
+ .add-reviews-modal {
+   .is-reviews {
+    .ql-editor {
+      height: 150px;
+      min-height: 150px;
+    }
+  }
+ }
+}

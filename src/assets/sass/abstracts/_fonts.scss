@@ -1,0 +1,80 @@
+$FONT-PATH: '#{$MAIN-PATH}/fonts/common';
+
+@font-face {
+  font-family: "Captcha Mom";
+  src: url("#{$FONT-PATH}/captcha/CaptchaMom.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('#{$FONT-PATH}/opensans/regular/opensans.eot');
+  src: url('#{$FONT-PATH}/opensans/regular/opensans.eot?#iefix') format('embedded-opentype'),
+       url('#{$FONT-PATH}/opensans/regular/opensans.svg#opensans') format('svg'),
+       url('#{$FONT-PATH}/opensans/regular/opensans.ttf') format('truetype'),
+       url('#{$FONT-PATH}/opensans/regular/opensans.woff') format('woff'),
+       url('#{$FONT-PATH}/opensans/regular/opensans.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('#{$FONT-PATH}/opensans/italic/opensans.eot');
+  src: url('#{$FONT-PATH}/opensans/italic/opensans.eot?#iefix') format('embedded-opentype'),
+       url('#{$FONT-PATH}/opensans/italic/opensans.svg#opensans') format('svg'),
+       url('#{$FONT-PATH}/opensans/italic/opensans.ttf') format('truetype'),
+       url('#{$FONT-PATH}/opensans/italic/opensans.woff') format('woff'),
+       url('#{$FONT-PATH}/opensans/italic/opensans.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('#{$FONT-PATH}/opensans/bold/opensans.eot');
+  src: url('#{$FONT-PATH}/opensans/bold/opensans.eot?#iefix') format('embedded-opentype'),
+       url('#{$FONT-PATH}/opensans/bold/opensans.svg#opensans') format('svg'),
+       url('#{$FONT-PATH}/opensans/bold/opensans.ttf') format('truetype'),
+       url('#{$FONT-PATH}/opensans/bold/opensans.woff') format('woff'),
+       url('#{$FONT-PATH}/opensans/bold/opensans.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('#{$FONT-PATH}/opensans/bolditalic/opensans.eot');
+  src: url('#{$FONT-PATH}/opensans/bolditalic/opensans.eot?#iefix') format('embedded-opentype'),
+       url('#{$FONT-PATH}/opensans/bolditalic/opensans.svg#opensans') format('svg'),
+       url('#{$FONT-PATH}/opensans/bolditalic/opensans.ttf') format('truetype'),
+       url('#{$FONT-PATH}/opensans/bolditalic/opensans.woff') format('woff'),
+       url('#{$FONT-PATH}/opensans/bolditalic/opensans.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('#{$FONT-PATH}/notosans/regular/NotoSansKR.eot');
+  src: url('#{$FONT-PATH}/notosans/regular/NotoSansKR.eot?#iefix') format('embedded-opentype'),
+       url('#{$FONT-PATH}/notosans/regular/NotoSansKR.svg#NotoSansKR') format('svg'),
+       url('#{$FONT-PATH}/notosans/regular/NotoSansKR.ttf') format('truetype'),
+       url('#{$FONT-PATH}/notosans/regular/NotoSansKR.woff') format('woff'),
+       url('#{$FONT-PATH}/notosans/regular/NotoSansKR.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('#{$FONT-PATH}/notosans/bold/NotoSansKR.eot');
+  src: url('#{$FONT-PATH}/notosans/bold/NotoSansKR.eot?#iefix') format('embedded-opentype'),
+       url('#{$FONT-PATH}/notosans/bold/NotoSansKR.svg#NotoSansKR') format('svg'),
+       url('#{$FONT-PATH}/notosans/bold/NotoSansKR.ttf') format('truetype'),
+       url('#{$FONT-PATH}/notosans/bold/NotoSansKR.woff') format('woff'),
+       url('#{$FONT-PATH}/notosans/bold/NotoSansKR.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}

@@ -1,0 +1,74 @@
+.add-post-modal {
+
+  .form-tab {
+    .form-list__data {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    button{
+      align-items: center;
+      color: white;
+      display: flex;
+      font-size: em(18px);
+      font-weight: inherit;
+      justify-content: center;
+      width: 100px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+
+      &.active {
+        background-color: #329bd3;
+        border: 1px solid #329bd3;
+      }
+    }
+  }
+
+  .error {
+    color: red;
+    font-size: em(16px);
+    font-style: italic;
+    text-align: left;
+  }
+
+
+  .is-content {
+    .ql-editor {
+      height: 620px;
+      min-height: 220px;
+    }
+  }
+
+  .select-list {
+     > select {
+       height: 33px;
+     }
+  }
+
+ 
+
+  .is-button, .is-order, .is-image {
+    display: flex;
+  }
+
+  .form__item-content {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  
+
+  
+ 
+
+
+  
+  
+
+  
+}

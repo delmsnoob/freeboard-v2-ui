@@ -1,0 +1,75 @@
+$input-suggestion-width: 130px;
+
+$input-suggestion-bg: #f7f7f7;
+$input-suggestion-bg-active: darken($input-suggestion-bg, 3%);
+$input-suggestion-border: #d8d8d8;
+$input-suggestion-reset: #631314;
+
+.input-suggestion {
+  @include min-max-width($input-suggestion-width);
+
+  .input-wrap {
+    min-width: 100%;
+
+    input {
+      padding-right: 35px;
+    }
+  }
+
+  .ico-close {
+    @include absolute(50%, 6px);
+    transform: translateY(-50%);
+    color: $input-suggestion-reset;
+    font: {
+      size: 9px;
+      weight: bold;
+    }
+
+    @include breakpoint(hoverable) {
+      color: darken($input-suggestion-reset, 2%);
+    }
+  }
+
+  .loader-wrap {
+    @include vm(absolute, 50%);
+    min-height: auto;
+    right: 0;
+    width: 20px;
+
+    &:after {
+      @include wh(10px, 10px);
+      border-width: 2px;
+    }
+  }
+}
+
+.input-suggestion-list {
+  @include min-max-width($input-suggestion-width);
+  @include fixed(0);
+  border-radius: 3px;
+  width: 100%;
+  z-index: 99;
+  background-color: $input-suggestion-bg;
+  border-radius: 3px;
+  border: solid 1px $input-suggestion-border;
+}
+
+.input-suggestion-list__item {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  min-height: 27px;
+  padding: 3px;
+
+  &.is-active {
+    background-color: $input-suggestion-bg-active;
+  }
+
+  @include breakpoint(hoverable) {
+    background-color: darken($input-suggestion-bg, 2%);
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $input-suggestion-border;
+  }
+}

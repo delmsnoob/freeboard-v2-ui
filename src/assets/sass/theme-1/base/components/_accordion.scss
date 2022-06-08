@@ -1,0 +1,35 @@
+.accordion__head {
+  $THEME-bg: #ffff;
+  $THEME-tx: $THEME-base-color;
+
+  background-color: $THEME-bg;
+  color: $THEME-tx;
+
+  &:not(.is-open) {
+    @include breakpoint(hoverable) {
+      $THEME-bg: #ffff;
+
+      background-color: $THEME-bg;
+    }
+  }
+
+  .is-open & {
+    $THEME-bg: #ffff;
+
+    background-color: $THEME-bg;
+  }
+}
+
+.accordion-arr {
+  i {
+    $THEME-tx: #ddd;
+
+    color: $THEME-tx;
+  }
+}
+
+.accordion__body {
+  $THEME-bg: #f5f5f5;
+
+  background-color: $THEME-bg;
+}

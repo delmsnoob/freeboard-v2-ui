@@ -1,0 +1,50 @@
+.modify-post-modal {
+
+  .form__head {
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+
+      .active {
+        background-color: #7498fd;
+        color: #616161;
+      }
+    }
+
+    .tab-item {
+      background-color: #616161;
+      color: #d2d2d4;
+      padding: 5px 10px;
+      text-transform: uppercase;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .is-content {
+    .ql-editor {
+      min-height: 220px;
+      height: auto;
+    }
+  }
+
+  .select-list {
+     > select {
+       height: 33px;
+     }
+  }
+
+  .is-button, .is-order, .is-image {
+    display: flex;
+  }
+
+  .form__item-content {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

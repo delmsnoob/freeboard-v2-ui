@@ -1,0 +1,45 @@
+.tbl--banner {
+  .table__td {
+    &.id {
+      width: 100px !important;
+    }
+
+
+    &.image {
+        width: 100px !important;
+
+      img {
+        width: 50px;
+      }
+    }
+
+    &.sequence {
+      width: 100px !important;
+    }
+
+    &.position {
+      width: 100px !important;
+
+      .select-list {
+        background-color: #2e3440;
+        border: 1px solid #272e3a;
+        color: #fff;
+        width: inherit;
+        
+        .ico-arrow-line {
+          top: 10px;
+        }
+      }
+    }
+
+    &.status {
+      width: 100px !important;
+    }
+
+    &.status {
+      .toggle-wrap {
+        min-width: inherit;
+      }
+    }
+  }
+}

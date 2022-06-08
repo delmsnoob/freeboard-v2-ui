@@ -1,0 +1,50 @@
+$searchbar-margin: 3px;
+
+.searchbar {
+  margin-bottom: -#{$searchbar-margin};
+
+  .input-wrap, .select-list {
+    background-color: #2e3440;
+    border: 1px solid #272e3a;
+    color: #fff;
+  }
+
+  .btn-refresh,
+  .btn-search,
+  .btn-search-clear {
+    $THEME-bg: #2e3440;
+    $THEME-tx: $THEME-base-accent;
+    $THEME-border: #222935;
+
+    background-color: $THEME-bg;
+    border: 1px solid $THEME-border;
+    color: $THEME-tx;
+    min-height: 30px;
+
+    i {
+      color: #f1f1f1;
+    }
+
+   
+  }
+
+}
+
+.searchbar__item {
+  margin-bottom: $searchbar-margin;
+
+  &:not(:last-child) {
+    margin-right: $searchbar-margin;
+  }
+
+  &.searchbar__item--filterby {
+    width: 100px;
+  }
+
+  &.searchbar__item--dateBy {
+    width: 130px;
+  }
+}
+
+
+

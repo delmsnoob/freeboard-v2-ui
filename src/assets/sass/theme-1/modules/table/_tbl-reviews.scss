@@ -1,0 +1,28 @@
+.tbl--reviews {
+  .table__td {
+    &.no {
+
+    }
+
+    &.image {
+      img {
+        width: 50px;
+      }
+    }
+
+    &.featured {
+      width: 100px !important;
+      .toggle-wrap {
+        min-width: inherit;
+      }
+    }
+
+    &.sequence {
+      .input-wrap {
+        min-width: inherit;
+      }
+    }
+  }
+
+  
+}

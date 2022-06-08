@@ -1,0 +1,137 @@
+.modal {
+  .modal-inner {
+    background-color: #353b47;
+    border: 1px solid #2c313a;
+  }
+
+  .modal__title {
+    color: #afb7ca;
+  }
+
+  .form-list__head {
+    background-color: #3d4350;
+    border: 1px solid #2c323c;
+  }
+  
+  .form-list-layer {
+    background-color: #3d4350;
+    border-radius: 3px;
+    border: 1px solid #2c323c;
+    color: #6a7d92;
+    padding: 8px;
+  }
+
+  .buttons-list, .sequence-list, .status-list {
+    .form-list__lbl {
+      display: flex;
+      align-items: center;
+      padding: inherit;
+    }
+
+    .form-list__data {
+      display: flex;
+    }
+
+    .form-list__item {
+      width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: inherit;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .errors .form-list__data {
+    text-align: right;
+    color: red;
+    font-style: italic;
+  }
+
+  .form-list__item {
+    .attach-image__lbl {
+      height: 160px;
+    }
+
+    .post-list {
+      .tag-input-item {
+        align-items: center;
+        background-color: #afb7ca;
+        color: #353b47;
+        justify-content: center;
+
+        @include breakpoint(hoverable) {
+          background-color: #c4cada;
+        }
+      }
+    } 
+
+    .form-list__lbl {
+      color: #afb7ca;
+      font-weight: 700;
+      text-transform: uppercase;
+      vertical-align: top;
+    }
+
+    .input-wrap, .quill-editor, .select-list, .tag-input, .tag-input input{
+      background-color: #444b58;
+      border-color: #323944;
+      border-radius: 3px;
+      border: 1px solid #272e3a;
+      color: #afb7ca;
+    }
+
+    .input-wrap {
+      min-height: 35px;
+    }
+
+    .tag-input-item {
+      background-color: #353b47;
+      color: #afb7ca;
+
+      @include breakpoint(hoverable) {
+        background-color: #404755;
+      }
+    }
+
+    .attach-image__lbl {
+      background-color: #444b58;
+    }
+
+    .ql-container.ql-snow {
+      border: solid 1px #ffffff !important;
+    }
+
+    .ql-editor {
+      background-color: #ffffff;
+    }
+
+    .quill-editor p {
+      color: #afb7ca;
+    }
+
+    .quill-editor .ql-stroke {
+      stroke: #afb7ca;
+    }
+
+    .quill-editor .ql-blank:before {
+      color: #afb7ca;
+    }
+
+    .ql-toolbar.ql-snow {
+      background-color: #2c323e;
+      border-color: #323944;
+      border-radius: 3px;
+      border: 1px solid #272e3a;
+      color: #afb7ca;
+    }
+  }
+
+  .form-list__footer {
+    button {
+      min-width: 70px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

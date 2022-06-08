@@ -1,0 +1,24 @@
+$THEME-base-accent: #3c4451;
+
+.main-sidebar {
+  background-color: #353b47;
+
+  @include breakpoint(768px) {
+    max-width: 200px;
+    min-width: 200px;
+  }
+}
+
+.main-body {
+  background-color: $THEME-base-accent;
+}
+
+.main-body-inner {
+  background-color: $THEME-base-accent;
+}
+
+.main__contents {
+  border: 1px solid #2a303a;
+  background-color: #353b47;
+}
+

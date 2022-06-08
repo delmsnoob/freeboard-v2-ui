@@ -1,0 +1,28 @@
+.input-suggestion {
+  position: relative;
+  display: inline-flex;
+
+  .input-wrap {
+    width: 100%;
+  }
+
+  .loader-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:after {
+      position: static;
+    }
+  }
+}
+
+.input-suggestion-list {
+  @extend .scroll;
+  @include absolute(0);
+  overflow: auto;
+  z-index: 99;
+  max-height: 145px;
+}
+
+.input-suggestion-list__inner {}

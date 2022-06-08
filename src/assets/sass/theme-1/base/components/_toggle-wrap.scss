@@ -1,0 +1,64 @@
+%active-circle {
+  background-color:#488645;
+  border-color: #60cc69;
+}
+
+%active-bg {
+  background-color: #60cc69;
+}
+
+%inactive-circle {
+  background-color: #3c4456;
+  border-color: #282e3c;
+}
+
+%inactive-bg {
+  background-color: #3e4956;
+}
+
+.toggle-inner {
+  .toggle-circle {
+    @extend %active-circle;
+
+    .toggle--inverted & {
+      @extend %inactive-circle;
+    }
+  }
+}
+
+.toggle-box {
+  .toggle-inner & {
+    @extend %active-bg;
+
+    span {
+      color: #f1f1f1
+    }
+
+    .toggle--inverted & {
+      @extend %inactive-bg;
+    }
+  }
+}
+
+input[type="radio"]:checked + .toggle-box,
+input[type="checkbox"]:checked + .toggle-box {
+  .toggle-inner & {
+    @extend %inactive-bg;
+
+    span {
+      color: #111
+    }
+
+    .toggle--inverted & {
+      @extend %active-bg;
+    }
+
+    .toggle-circle {
+      @extend %inactive-circle;
+
+      .toggle--inverted & {
+        @extend %active-circle;
+      }
+    }
+  }
+}

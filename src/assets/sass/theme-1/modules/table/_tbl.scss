@@ -1,0 +1,114 @@
+$table-head: #313742;
+$table-hover: #363c46;
+$table-row-even: #2f3440;
+$table-row-odd: #3a404c;
+$table-head-color: #aaafbb;
+$table-data-color: #a5a9bb;
+$table-data-border:#2f3440;
+$pagination-bg-color: #979dab;
+
+// .table-wrap {
+//   height:calc(100% - 30px);
+// }
+
+.table__inner {
+  border: 1px solid $table-data-border;
+}
+
+.table-title {
+  $THEME-tx: #737d94;
+  color: $THEME-tx;
+}
+
+.table__td {
+  &.actions {
+    width: 70px !important;
+  }
+
+  &.date {
+    width: 100px !important;
+  }
+}
+
+.table__head {
+   display: table-header-group;
+
+  .table__td {
+    background-color: $table-head;
+    border-bottom: 2px solid $table-head;
+    border-right: 1px solid $table-data-border;
+    color: $table-head-color;
+    font: {
+      size: 10px;
+      weight: bold;
+    }
+    padding: 2px 4px;
+    position: sticky;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 2;
+
+    @include breakpoint(992px) {
+      font-size: 12px;
+    }
+
+    @include breakpoint(1200px) {
+      font-size: 13px;
+    }
+  }
+}
+
+.table__body {
+  .table__td {
+    color: $table-data-color;
+    background-color: $table-row-odd;
+
+    &:not(:last-child) {
+      border-right: 1px solid $table-data-border;
+    }
+  }
+
+  .table__tr {
+    @include breakpoint(hoverable) {
+      .table__td {
+        background-color: $table-hover;
+      }
+    }
+
+    &:not(:last-of-type) {
+      .table__td {
+        border-bottom: 1px solid $table-data-border;
+      }
+    }
+
+    &:nth-child(even) {
+      .table__td {
+        background-color: $table-row-even;
+
+        &:not(:last-child) {
+          border-right: 1px solid $table-data-border;
+        }
+      }
+
+      @include breakpoint(hoverable) {
+        .table__td {
+          background-color: $table-hover;
+        }
+      }
+    }
+  }
+}
+
+.table__footer {
+  // .pagination {
+  //   // align-items: center;
+  //   // justify-content: center;
+  //   // display: flex;
+  // }
+
+  .pagination li.is-active {
+    background-color: $pagination-bg-color;
+  }
+}
+
