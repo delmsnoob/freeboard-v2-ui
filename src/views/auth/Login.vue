@@ -53,7 +53,6 @@
 import InputWrap from '@/components/base/InputWrap.vue'
 
 import translations from '@/assets/js/translations/common/login'
-import axios from 'axios'
 
 import { mapActions } from 'vuex'
 
@@ -79,7 +78,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('login', {
+    ...mapActions('users', {
       login: 'login'
     }),
 

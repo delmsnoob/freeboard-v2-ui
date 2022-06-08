@@ -86,8 +86,9 @@ export default {
   },
 
   methods: {
-    ...mapActions('register', {
-      register: 'register'
+    ...mapActions('users', {
+      register: 'register',
+      checkLoginId: 'checkLoginId'
     }),
 
     async handleRegister () {
@@ -117,6 +118,16 @@ export default {
         this.err = error.response.data.message
         this.dataStatus = false
         console.log(error)
+      }
+    },
+
+    async checkLoginId () {
+      try {
+        await this.checkLoginId({
+          loginId: this.data.login_id
+        })
+      } catch (error) {
+        throw new Error(error)
       }
     }
   }
