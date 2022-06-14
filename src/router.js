@@ -7,6 +7,7 @@ import Home from '@/views/home/Home.vue'
 import Login from '@/views/auth/Login.vue'
 
 import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
+import { vueSessionStorage } from '@/assets/js/mixins/base/VueSessionStorage'
 
 Vue.use(Router)
 
@@ -64,15 +65,25 @@ const router = new Router({
 const unauthRoutes = [
   'login',
   'logout',
+  'register',
   'page-not-found'
 ]
 
+const hasTokenRoutes = [
+  'login',
+  'register'
+]
+
 router.beforeEach((to, from, next) => {
-  // const hasToken = vueLocalStorage.has('token')
-  //
-  // if (!hasToken && !_includes(unauthRoutes, to.name)) {
-  //   return next({ name: 'login' })
-  // }
+  const localStorageToken = vueLocalStorage.has('token')
+  const sessionStorageToken = vueSessionStorage.has('token')
+  console.log(localStorageToken, sessionStorageToken)
+
+  if (!localStorageToken && !sessionStorageToken && !_includes(unauthRoutes, to.name)) {
+    return next({ name: 'login' })
+  } else if (localStorageToken && sessionStorageToken && _includes(hasTokenRoutes, to.name)) {
+    return next({ name: 'home' })
+  }
 
   return next()
 })
