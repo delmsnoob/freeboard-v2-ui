@@ -38,20 +38,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 // components
-const Hamburger = () => import('@/components/base/Hamburger')
-const TheNav = () => import('@/components/layout/TheNav')
-const TheFooter = () => import('@/components/layout/TheFooter')
+// const Hamburger = () => import('@/components/base/Hamburger')
+// const TheNav = () => import('@/components/layout/TheNav')
+// const TheFooter = () => import('@/components/layout/TheFooter')
 
 export default {
   name: 'App',
 
   components: {
-    Hamburger,
-    TheNav,
-    TheFooter
+    // Hamburger,
+    // TheNav,
+    // TheFooter
   },
 
   data () {
