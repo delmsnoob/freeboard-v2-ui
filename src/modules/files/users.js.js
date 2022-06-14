@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
 
+// import _get from 'lodash/get'
+
 export default {
   namespaced: true,
 
@@ -16,6 +18,7 @@ export default {
 
     LOGOUT (state) {
       vueLocalStorage.removeItem('token')
+      state.token = null
     },
 
     TICKLING (state) {
@@ -23,39 +26,40 @@ export default {
     }
   },
 
-  actions : {
-    async login ({ commit, state }, payload) {
+  actions: {
+    async login ({ state }, payload) {
       try {
-        console.log(payload, 'payload')
-        const response = await axios.post('/login', payload)
-
-        return response.data
+        const response = await axios.post('/users/login', payload)
+        state.token = response
+        vueLocalStorage.setItem('token', response.data)
       } catch (error) {
         console.log(error)
         throw error
       }
     },
 
-    logout ({ commit }) {
+    async logout ({ commit }) {
       try {
-        commit('LOGOUT')
+        await commit('LOGOUT')
+        console.log(this.state.token)
       } catch (error) {
         console.log(error)
       }
     },
 
-    async register({ commit, state }, payload) {
+    async register ({ commit, state }, payload) {
       try {
-        const response = await axios.post('/register', { payload })
+        const response = await axios.post('/users/register', payload)
+        vueLocalStorage.setItem('token', response.data)
+
         return response
-        // console.log(response.error)
       } catch (error) {
         console.log(error)
-        throw error
+        throw new Error(error)
       }
     },
 
-    async checkLoginId({ state, commit }, { loginId }) {
+    async checkLoginId ({ state, commit }, { loginId }) {
       try {
         return await axios.get(`/users/${loginId}`)
       } catch (error) {
