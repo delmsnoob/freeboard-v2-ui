@@ -10,7 +10,7 @@
       >
         <div class="form__item">
           <InputWrap
-            v-model="data.login_id"
+            v-model="user.loginId"
             :placeholder="translate('LOGIN ID')"
             type="text"
           />
@@ -18,7 +18,7 @@
 
         <div class="form__item">
           <InputWrap
-            v-model="data.password"
+            v-model="user.password"
             :placeholder="translate('PASSWORD')"
             type="password"
           />
@@ -27,7 +27,7 @@
         <div class="form__item form__item--btn">
           <button class="btn--login">
             <div
-              v-if="dataStatus.laoding"
+              v-if="dataStatus.loading"
               class="loader-wrap"
             >
             </div>
@@ -36,13 +36,30 @@
               {{ translate('login') }}
             </span>
           </button>
+        </div>
 
-          <div
-            v-if="err && err.length > 0"
-            class="login-error form-error"
+        <div class="form__item form__item--btn">
+          <button
+            class="btn--login"
+            @click="toRegister"
           >
-            {{ err }}
-          </div>
+            <div
+              v-if="dataStatus.loading"
+              class="loader-wrap"
+            >
+            </div>
+
+            <span>
+              {{ translate('create account') }}
+            </span>
+          </button>
+        </div>
+
+        <div
+          v-if="err && err.length > 0"
+          class="login-error form-error"
+        >
+          {{ err }}
         </div>
       </form>
     </div>
@@ -50,11 +67,20 @@
 </template>
 
 <script>
+// lib
+import axios from 'axios'
+
+import { mapActions, mapState } from 'vuex'
+
+// components
 import InputWrap from '@/components/base/InputWrap.vue'
 
+// translations
 import translations from '@/assets/js/translations/common/login'
 
-import { mapActions } from 'vuex'
+// mixins
+import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
+import { vueSessionStorage } from '@/assets/js/mixins/base/VueSessionStorage'
 
 export default {
   name: 'Login',
@@ -65,8 +91,8 @@ export default {
   data () {
     return {
       translations,
-      data: {
-        login_id: '',
+      user: {
+        loginId: '',
         password: ''
       },
       err: null,
@@ -77,44 +103,52 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('users', [
+      'token'
+    ])
+  },
+
   methods: {
-    ...mapActions('users', {
-      login: 'login'
-    }),
+    ...mapActions('users', [
+      'login'
+    ]),
 
     async handleLogin () {
       try {
-        if (
-          !this.data.login_id ||
-          !this.data.password
-        ) {
+        if (!this.user.loginId || !this.user.password) {
           return (this.err = 'All fields are required')
         }
 
-        const token = await this.login({
-          loginId: this.data.login_id,
-          password: this.data.password
-        })
-
-        if (token) {
-          await this.$router.push({ name: 'home' })
-        } else {
-          alert('User not found')
+        const data = {
+          login_id: this.user.loginId,
+          password: this.user.password
         }
 
-        // axios.defaults.headers.Authorization = `Bearer ${token}`
+        await this.login(data)
 
-        // vueLocalStorage.setItem('token', token)
+        if (!this.token || !this.token.data) {
+          this.$_swal({
+            type: 'error',
+            title: this.translate('login failed')
+          })
+        }
 
-        // await this.$router.push({name: 'post'})
+        vueLocalStorage.setItem('token', this.token.data)
+        vueSessionStorage.setItem('token', this.token.data)
+        axios.defaults.headers.common.Authorization = `Bearer ${vueLocalStorage.getItem('token')}`
 
+        await this.$router.push({ name: 'home' })
       } catch (error) {
         this.err = error.response.data.message
         this.dataStatus = false
         console.log(error)
       }
+    },
+
+    toRegister () {
+      this.$router.push({ name: 'register' })
     }
   }
 }
 </script>
-

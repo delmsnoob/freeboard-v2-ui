@@ -44,15 +44,31 @@
               {{ translate('register') }}
             </span>
           </button>
-
-          <div
-            v-if="err && err.length > 0"
-            class="login-error form-error"
-          >
-            {{ err }}
-          </div>
         </div>
 
+        <div class="form__item form__item--btn">
+          <button
+            class="btn--login"
+            @click="toLogin"
+          >
+            <div
+              v-if="dataStatus.loading"
+              class="loader-wrap"
+            >
+            </div>
+
+            <span>
+              {{ translate('go back') }}
+            </span>
+          </button>
+        </div>
+
+        <div
+          v-if="err && err.length > 0"
+          class="login-error form-error"
+        >
+          {{ err }}
+        </div>
       </form>
     </div>
   </div>
@@ -98,6 +114,8 @@ export default {
           !this.data.password
         ) {
           return (this.err = 'All fields are required')
+        } else if (!(this.data.password === this.confirmPassword)) {
+          return (this.err = 'Password and confirm password dont match')
         }
 
         const params = {
@@ -106,16 +124,15 @@ export default {
           confirmPassword: this.confirmPassword
         }
 
-        const response =  await this.register(params)
+        const response = await this.register(params)
+        console.log(response, 'response')
 
         if (response) {
           await this.$router.push({ name: 'login' })
         }
 
-        return response.error
-
+        return response
       } catch (error) {
-        this.err = error.response.data.message
         this.dataStatus = false
         console.log(error)
       }
@@ -129,8 +146,11 @@ export default {
       } catch (error) {
         throw new Error(error)
       }
+    },
+
+    toLogin () {
+      this.$router.push({ name: 'login' })
     }
   }
 }
 </script>
-
