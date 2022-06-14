@@ -10,7 +10,7 @@
       >
         <div class="form__item">
           <InputWrap
-            v-model="data.login_id"
+            v-model="user.loginId"
             :placeholder="translate('LOGIN ID')"
             type="text"
           />
@@ -18,7 +18,7 @@
 
         <div class="form__item">
           <InputWrap
-            v-model="data.password"
+            v-model="user.password"
             :placeholder="translate('PASSWORD')"
             type="password"
           />
@@ -26,7 +26,7 @@
 
         <div class="form__item">
           <InputWrap
-            v-model="confirmPassword"
+            v-model="user.confirmPassword"
             :placeholder="translate('CONFIRM PASSWORD')"
             type="password"
           />
@@ -88,11 +88,11 @@ export default {
   data () {
     return {
       translations,
-      data: {
-        login_id: '',
-        password: ''
+      user: {
+        loginId: '',
+        password: '',
+        confirmPassword: ''
       },
-      confirmPassword: '',
       err: null,
 
       dataStatus: {
@@ -102,26 +102,27 @@ export default {
   },
 
   methods: {
-    ...mapActions('users', {
-      register: 'register',
-      checkLoginId: 'checkLoginId'
-    }),
+    ...mapActions('users', [
+      'register',
+      'checkLoginId'
+    ]),
 
     async handleRegister () {
       try {
         if (
-          !this.data.login_id ||
-          !this.data.password
+          !this.user.loginId ||
+          !this.user.password ||
+          !this.user.confirmPassword
         ) {
           return (this.err = 'All fields are required')
-        } else if (!(this.data.password === this.confirmPassword)) {
+        } /* else if (!(this.data.password === this.confirmPassword)) {
           return (this.err = 'Password and confirm password dont match')
-        }
+        } */
 
         const params = {
-          loginId: this.data.login_id,
-          password: this.data.password,
-          confirmPassword: this.confirmPassword
+          login_id: this.user.loginId,
+          password: this.user.password,
+          confirm_password: this.user.confirmPassword
         }
 
         const response = await this.register(params)
