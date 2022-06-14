@@ -2,9 +2,9 @@
   <div class="home-inner">
     <div class="main__toolbar">
       <InputWrap
-        placeholder="test"
         v-model="amount"
-        isAmount
+        placeholder="test"
+        is-amount
       />
 
       <search-bar
@@ -27,7 +27,7 @@
     </div>
 
     <div class="main__contents">
-      <accordion>
+      <!-- <accordion>
         <template #title>
           Lorem ipsum
         </template>
@@ -35,15 +35,11 @@
         <template #body>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </template>
-      </accordion>
-
-      <br />
-      <br />
-      <br />
+      </accordion> -->
 
       <form-list @submit.prevent="">
         <template #header>
-          <form-list-layer
+          <!-- <form-list-layer
             max-width="300px"
             position="right"
           >
@@ -71,11 +67,19 @@
             <tooltip position="left">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.
             </tooltip>
+          </form-list-layer> -->
+          <form-list-layer
+            max-width="400px"
+            position="center"
+          >
+            <form-list-item>
+              <h2>Freeboard</h2>
+            </form-list-item>
           </form-list-layer>
         </template>
 
         <template #body>
-          <form-list-layer>
+          <!-- <form-list-layer>
             <form-list-item
               class="is-title"
               label="title"
@@ -94,15 +98,15 @@
                 :default-tags="['a', 'b']"
               />
             </form-list-item>
-          </form-list-layer>
+          </form-list-layer> -->
         </template>
 
         <template #footer>
-          <button class="btn-default">
+          <!-- <button class="btn-default">
             <span>
               asdas
             </span>
-          </button>
+          </button> -->
         </template>
       </form-list>
     </div>
@@ -137,10 +141,10 @@ import Accordion from '@/components/base/Accordion'
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
 
 const SearchBar = () => import('@/components/base/SearchBar')
-const TextArea  = () => import('@/components/base/TextArea')
-const DateTimePicker  = () => import('@/components/base/DateTimePicker')
-const TagInput  = () => import('@/components/base/TagInput')
-const Quill  = () => import('@/components/base/Quill')
+const TextArea = () => import('@/components/base/TextArea')
+const DateTimePicker = () => import('@/components/base/DateTimePicker')
+const TagInput = () => import('@/components/base/TagInput')
+const Quill = () => import('@/components/base/Quill')
 const AttachImage = () => import('@/components/base/AttachImage')
 const Tooltip = () => import('@/components/base/Tooltip')
 
@@ -165,7 +169,7 @@ export default {
     return {
       translations: {},
       modals: {
-        test: new this.ModalData({name: 'asd'})
+        test: new this.ModalData({ name: 'asd' })
       },
 
       amount: 0,

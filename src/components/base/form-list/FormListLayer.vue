@@ -24,8 +24,8 @@ export default {
   },
 
   mounted () {
-    if (this.position === 'right') {
-      this.$refs['form-list-layer'].style.marginLeft = 'auto'
+    if (this.position === 'center') {
+      this.$refs['form-list-layer'].style.margin = 'auto'
     }
   }
 }
