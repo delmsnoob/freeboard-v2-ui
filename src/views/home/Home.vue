@@ -249,12 +249,13 @@ export default {
       }
     },
 
-    sendPost () {
+    async sendPost () {
       const data = {
         user_id: this.loginId,
         post_content: this.postDetails.postContent
       }
 
+      await this.createPost(data)
       console.log(data, 'data')
     }
   }
