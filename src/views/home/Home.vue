@@ -135,7 +135,7 @@
 
 <script>
 // vuex || sockets
-
+import { mapActions } from 'vuex'
 // lib
 
 // translations || dictionary
@@ -143,7 +143,6 @@
 // components
 import Accordion from '@/components/base/Accordion'
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
-import { vueLocalStorage } from '../../assets/js/mixins/base/VueLocalStorage'
 
 const SearchBar = () => import('@/components/base/SearchBar')
 const TextArea = () => import('@/components/base/TextArea')
@@ -234,9 +233,11 @@ export default {
     }
   },
 
-  created () {},
-
   methods: {
+    ...mapActions('posts', [
+      'createPost'
+    ]),
+
     async handleSearch (data) {
       const path = '/'
       const query = data ? data.query : this.searchParams
