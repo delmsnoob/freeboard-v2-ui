@@ -138,7 +138,12 @@ export default {
         vueSessionStorage.setItem('token', this.token.data)
         axios.defaults.headers.common.Authorization = `Bearer ${vueLocalStorage.getItem('token')}`
 
-        await this.$router.push({ name: 'home' })
+        await this.$router.push({
+          name: 'home',
+          params: {
+            loginId: data.login_id
+          }
+        })
       } catch (error) {
         this.err = error.response.data.message
         this.dataStatus = false

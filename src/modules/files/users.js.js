@@ -50,9 +50,7 @@ export default {
     async register ({ commit, state }, payload) {
       try {
         const response = await axios.post('/users/register', payload)
-        vueLocalStorage.setItem('token', response.data)
-
-        return response
+        state.err = response
       } catch (error) {
         console.log(error)
         throw new Error(error)

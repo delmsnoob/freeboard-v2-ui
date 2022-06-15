@@ -64,7 +64,7 @@
         </div>
 
         <div
-          v-if="err && err.length > 0"
+          v-if="err && err.lenght > 0"
           class="login-error form-error"
         >
           {{ err }}
@@ -93,6 +93,7 @@ export default {
         password: '',
         confirmPassword: ''
       },
+
       err: null,
 
       dataStatus: {
@@ -108,6 +109,7 @@ export default {
     ]),
 
     async handleRegister () {
+      this.err = null
       try {
         if (
           !this.user.loginId ||
@@ -125,14 +127,8 @@ export default {
           confirm_password: this.user.confirmPassword
         }
 
-        const response = await this.register(params)
-        console.log(response, 'response')
-
-        if (response) {
-          await this.$router.push({ name: 'login' })
-        }
-
-        return response
+        await this.register(params)
+        await this.$router.push({ name: 'login' })
       } catch (error) {
         this.dataStatus = false
         console.log(error)

@@ -72,33 +72,37 @@
             max-width="400px"
             position="center"
           >
-            <form-list-item>
+            <form-list-item label="">
               <h2>Freeboard</h2>
             </form-list-item>
           </form-list-layer>
         </template>
 
         <template #body>
-          <!-- <form-list-layer>
-            <form-list-item
-              class="is-title"
-              label="title"
-            >
-              <Quill
-                ref="title"
-                v-model="test"
-                type="title"
-                :value="test"
-              />
-            </form-list-item>
+          <form-list-layer>
+            <Quill
+              ref="content"
+              v-model="postDetails.postContent"
+            />
+          </form-list-layer>
 
-            <form-list-item label="content">
-              <TagInput
-                v-model="tagsArr"
-                :default-tags="['a', 'b']"
-              />
-            </form-list-item>
-          </form-list-layer> -->
+          <div class="post-action__wrapper">
+            <button
+              class="btn-default post-action-btn"
+              @click="sendPost"
+            >
+              <span>
+                POST
+              </span>
+            </button>
+
+            <button class="btn-default post-action-btn">
+              <span>
+                CANCEL
+              </span>
+            </button>
+            {{ loginId }}
+          </div>
         </template>
 
         <template #footer>
@@ -139,6 +143,7 @@
 // components
 import Accordion from '@/components/base/Accordion'
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
+import { vueLocalStorage } from '../../assets/js/mixins/base/VueLocalStorage'
 
 const SearchBar = () => import('@/components/base/SearchBar')
 const TextArea = () => import('@/components/base/TextArea')
@@ -165,6 +170,9 @@ export default {
     Tooltip
   },
 
+  // eslint-disable-next-line vue/require-prop-types
+  props: ['loginId'],
+
   data () {
     return {
       translations: {},
@@ -180,7 +188,11 @@ export default {
         existing: null
       },
 
-      test: 'asd',
+      postDetails: {
+        loginId: null,
+        postContent: ''
+      },
+
       tagsArr: [],
 
       searchParams: {
@@ -235,6 +247,15 @@ export default {
         await this.$nextTick()
         this.$router.push({ path })
       }
+    },
+
+    sendPost () {
+      const data = {
+        user_id: this.loginId,
+        post_content: this.postDetails.postContent
+      }
+
+      console.log(data, 'data')
     }
   }
 }
