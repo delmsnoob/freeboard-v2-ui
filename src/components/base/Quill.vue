@@ -16,10 +16,10 @@
 <template>
   <quill-editor
     ref="quill"
-    v-bind="$attrs"
-    v-on="$listeners"
     v-model="quillData"
+    v-bind="$attrs"
     :options="defaultOptions"
+    v-on="$listeners"
   />
 </template>
 
@@ -75,7 +75,7 @@ export default {
     return {
       quillData: '',
       defaultOptions: {
-        placeholder: 'Content here...',
+        placeholder: "What's on our mind...",
         modules: {
           toolbar: [
             [{ 'align': [] }],
@@ -111,6 +111,20 @@ export default {
     }
   },
 
+  watch: {
+    value (val) {
+      this.quillData = this.value
+    },
+
+    quillData (val) {
+      this.$emit('input', val)
+    },
+
+    placeholder (val) {
+      this.defaultOptions.placeholder = val
+    }
+  },
+
   created () {
     const placeholder = this.placeholder
 
@@ -120,7 +134,7 @@ export default {
 
     if (!placeholder) {
       if (this.type === 'content') {
-        this.defaultOptions.placeholder = 'Content here...'
+        this.defaultOptions.placeholder = "What's on your mind..."
       }
 
       if (this.type === 'title') {
@@ -154,20 +168,6 @@ export default {
     setTimeout(() => {
       clearInterval(load)
     }, 100)
-  },
-
-  watch: {
-    value (val) {
-      this.quillData = this.value
-    },
-
-    quillData (val) {
-      this.$emit('input', val)
-    },
-
-    placeholder (val) {
-      this.defaultOptions.placeholder = val
-    }
   }
 }
 </script>

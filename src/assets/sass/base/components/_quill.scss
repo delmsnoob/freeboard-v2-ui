@@ -1,7 +1,9 @@
 .quill-editor {
   background-color: $THEME-quill-editor-bg;
   width: 100%;
-
+  
+  display: flex;
+  flex-direction: column;
   p {
     font-size: 11px;
   }
@@ -31,6 +33,8 @@
   background-color: $THEME-quill-toolbar-bg;
   border-bottom: 0 !important;
 
+  order: 2;
+
   &.ql-snow {
     border: 1px solid $THEME-quill-toolbar-border;
   }
@@ -48,7 +52,9 @@
 
 .ql-editor {
   color:  $THEME-quill-editor-text;
-  height: auto;
+  // height: auto;
+  // 
+  min-height: 200px;
   padding: 8px;
 
   .is-title & {

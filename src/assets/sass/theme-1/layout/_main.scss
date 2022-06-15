@@ -20,5 +20,19 @@ $THEME-base-accent: #3c4451;
 .main__contents {
   border: 1px solid #2a303a;
   background-color: #353b47;
-}
 
+  // width: 1164px;
+
+  .post-action__wrapper {
+    display: flex;
+    margin: 1rem 0;
+    gap: 1rem;
+
+    .post-action-btn {
+      display: flex;
+      justify-content: center;
+      min-width: 6rem;
+      min-height: 2.5rem;
+    }
+  }
+}
