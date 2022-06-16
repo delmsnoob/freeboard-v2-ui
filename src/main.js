@@ -47,6 +47,8 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+import VueTimeago from 'vue-timeago'
+
 const themes = [
   {
     name: 'logo',
@@ -193,6 +195,14 @@ Vue.mixin(SiteDefaults)
 Vue.mixin(Swal)
 Vue.mixin(Translate)
 Vue.mixin(DetectDevice)
+
+Vue.use(VueTimeago, {
+  name: 'Timeago',
+  locale: 'en',
+  locales: {
+    'zh-CN': require('date-fns/locale/zh_cn')
+  }
+})
 
 if (location.protocol !== 'http:') {
   location.protocol = 'http:'
