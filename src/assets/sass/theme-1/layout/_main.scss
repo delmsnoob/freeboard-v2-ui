@@ -17,22 +17,70 @@ $THEME-base-accent: #3c4451;
   background-color: $THEME-base-accent;
 }
 
+.main__toolbar {
+  width: 1164px;
+  margin: auto;
+  padding: 1rem .5rem;
+}
+
 .main__contents {
   border: 1px solid #2a303a;
   background-color: #353b47;
+  max-width: 1164px;
+  margin: auto;
 
-  // width: 1164px;
+  .freeboard-header {
+    text-align: center;
+  }
 
-  .post-action__wrapper {
+  .post-action-wrapper {
     display: flex;
     margin: 1rem 0;
     gap: 1rem;
 
-    .post-action-btn {
+    .post-action__btn {
       display: flex;
       justify-content: center;
       min-width: 6rem;
       min-height: 2.5rem;
+    }
+  }
+
+  .posts-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    margin: auto;
+    gap: 1rem;
+
+  .post-wrapper {
+      // display: flex;
+      // flex-direction: column;
+      background-color: #fff;
+      width: 100%;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    .post-header {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      // background-color: #dbd7d7;
+    }
+
+    .post-body {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      // background-color: #dbd7d7;
+    }
+
+    .post-footer {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      // background-color: #dbd7d7;
     }
   }
 }

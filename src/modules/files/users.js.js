@@ -31,6 +31,7 @@ export default {
       try {
         const response = await axios.post('/users/login', payload)
         state.token = response
+
         vueLocalStorage.setItem('token', response.data)
       } catch (error) {
         console.log(error)
