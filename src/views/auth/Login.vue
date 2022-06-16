@@ -69,6 +69,7 @@
 <script>
 // lib
 import axios from 'axios'
+import _get from 'lodash/get'
 
 import { mapActions, mapState } from 'vuex'
 
@@ -105,13 +106,15 @@ export default {
 
   computed: {
     ...mapState('users', [
-      'token'
+      'token',
+      'user'
     ])
   },
 
   methods: {
     ...mapActions('users', [
-      'login'
+      'login',
+      'getUser'
     ]),
 
     async handleLogin () {
@@ -137,13 +140,14 @@ export default {
         vueLocalStorage.setItem('token', this.token.data)
         vueSessionStorage.setItem('token', this.token.data)
         axios.defaults.headers.common.Authorization = `Bearer ${vueLocalStorage.getItem('token')}`
+        /*
+        await this.getUser()
 
-        await this.$router.push({
-          name: 'home',
-          params: {
-            loginId: data.login_id
-          }
-        })
+        if (this.user) {
+          vueLocalStorage.setItem('userId', _get(this.user), 'id')
+        } */
+
+        await this.$router.push({ name: 'home' })
       } catch (error) {
         this.err = error.response.data.message
         this.dataStatus = false
