@@ -70,7 +70,7 @@
           </form-list-layer> -->
           <form-list-layer label="">
             <h2 class="freeboard-header">
-              Welcome to Freeboard {{ loginId }}
+              Welcome to Freeboard {{ userId }}
             </h2>
           </form-list-layer>
         </template>
@@ -93,12 +93,14 @@
               </span>
             </button>
 
-            <button class="btn-default post-action__btn">
+            <button
+              class="btn-default post-action__btn"
+              @click="clear"
+            >
               <span>
                 CANCEL
               </span>
             </button>
-            {{ loginId }}
           </div>
 
           <div class="posts-body">
@@ -165,6 +167,9 @@ import translations from '@/assets/js/translations/common/home'
 import Accordion from '@/components/base/Accordion'
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
 
+// mixins
+import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
+
 const SearchBar = () => import('@/components/base/SearchBar')
 const TextArea = () => import('@/components/base/TextArea')
 const DateTimePicker = () => import('@/components/base/DateTimePicker')
@@ -208,7 +213,7 @@ export default {
       translations,
       params,
 
-      userId: this.loginId,
+      userId: null,
 
       modals: {
         test: new this.ModalData({ name: 'asd' })
@@ -274,7 +279,7 @@ export default {
   },
 
   async mounted () {
-    await this.fetchPost()
+    await this.handleFetchPosts()
   },
 
   methods: {
@@ -307,7 +312,7 @@ export default {
     },
 
     async handleFetchPosts (data) {
-      console.log(data, 'home data')
+      this.userId = vueLocalStorage.getItem('userId')
       try {
         const query = data && data.query ? data.query : this.params
         await this.fetchPost({

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
+import { vueSessionStorage } from '@/assets/js/mixins/base/VueSessionStorage'
 
 // import _get from 'lodash/get'
 
@@ -8,7 +9,8 @@ export default {
 
   state: {
     token: null,
-    ip: null
+    ip: null,
+    users: {}
   },
 
   mutations: {
@@ -31,8 +33,11 @@ export default {
       try {
         const response = await axios.post('/users/login', payload)
         state.token = response
-
+        vueLocalStorage.setItem('userId', payload.login_id)
+        const user_token = vueLocalStorage.getItem('userId')
+        console.log(user_token)
         vueLocalStorage.setItem('token', response.data)
+        vueSessionStorage.setItem('token', response.data)
       } catch (error) {
         console.log(error)
         throw error
