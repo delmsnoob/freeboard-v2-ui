@@ -107,7 +107,7 @@ export default {
   computed: {
     ...mapState('users', [
       'token',
-      'user'
+      'users'
     ])
   },
 
@@ -137,8 +137,9 @@ export default {
           })
         }
 
-        vueLocalStorage.setItem('token', this.token.data)
-        vueSessionStorage.setItem('token', this.token.data)
+        // vueLocalStorage.setItem('token', this.token.data)
+        // vueLocalStorage.setItem('user', this.data.login_id)
+        // vueSessionStorage.setItem('token', this.token.data)
         axios.defaults.headers.common.Authorization = `Bearer ${vueLocalStorage.getItem('token')}`
         /*
         await this.getUser()
@@ -146,7 +147,8 @@ export default {
         if (this.user) {
           vueLocalStorage.setItem('userId', _get(this.user), 'id')
         } */
-
+        // const userToken = vueLocalStorage.getItem('user')
+        // console.log(userToken, 'user token')
         await this.$router.push({ name: 'home' })
       } catch (error) {
         this.err = error.response.data.message
