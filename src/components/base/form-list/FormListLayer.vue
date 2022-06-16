@@ -2,7 +2,7 @@
   <div
     ref="form-list-layer"
     class="form-list-layer"
-    :style="{ maxWidth }"
+    :style="{ maxWidth, textAlign }"
   >
     <slot></slot>
   </div>
@@ -14,12 +14,18 @@ export default {
 
   props: {
     maxWidth: {
-      type: [String, Number]
+      type: [String, Number],
+      default: ''
     },
 
     position: {
       type: String,
-      default: 'left'
+      default: 'center'
+    },
+
+    textAlign: {
+      type: String,
+      default: ''
     }
   },
 
