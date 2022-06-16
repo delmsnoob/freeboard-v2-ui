@@ -2,9 +2,9 @@
   <div class="home-inner">
     <div class="main__toolbar">
       <InputWrap
-        v-model="amount"
-        placeholder="test"
-        is-amount
+        v-model="searchFor"
+        placeholder="Enter keywords here..."
+        class="search-keyword"
       />
 
       <search-bar
@@ -16,10 +16,10 @@
         <template #actions>
           <button
             class="btn-default"
-            @click="modals.test.$status = 1"
+            @click="logout"
           >
             <span>
-              MODAL
+              Logout
             </span>
           </button>
         </template>
@@ -68,13 +68,10 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.
             </tooltip>
           </form-list-layer> -->
-          <form-list-layer
-            max-width="400px"
-            position="center"
-          >
-            <form-list-item label="">
-              <h2>Freeboard</h2>
-            </form-list-item>
+          <form-list-layer label="">
+            <h2 class="freeboard-header">
+              Welcome to Freeboard {{ loginId }}
+            </h2>
           </form-list-layer>
         </template>
 
@@ -86,9 +83,9 @@
             />
           </form-list-layer>
 
-          <div class="post-action__wrapper">
+          <div class="post-action-wrapper">
             <button
-              class="btn-default post-action-btn"
+              class="btn-default post-action__btn"
               @click="sendPost"
             >
               <span>
@@ -96,12 +93,35 @@
               </span>
             </button>
 
-            <button class="btn-default post-action-btn">
+            <button class="btn-default post-action__btn">
               <span>
                 CANCEL
               </span>
             </button>
             {{ loginId }}
+          </div>
+
+          <div class="posts-body">
+            <form-list-layer
+              v-for="(item, key) in posts"
+              :key="key"
+              class="post-wrapper"
+            >
+              <div class="post-header">
+                @{{ item.user_id }}
+                <!-- <timeago
+                  :datetime="item.created_at"
+                  :auto-update="60"
+                /> -->
+              </div>
+              <div class="post-body">
+                <div v-html="item.post_content"></div>
+              </div>
+
+              <div class="post-footer">
+                <span>12 likes</span>
+              </div>
+            </form-list-layer>
           </div>
         </template>
 
@@ -135,10 +155,11 @@
 
 <script>
 // vuex || sockets
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 // lib
 
 // translations || dictionary
+import translations from '@/assets/js/translations/common/home'
 
 // components
 import Accordion from '@/components/base/Accordion'
@@ -173,13 +194,27 @@ export default {
   props: ['loginId'],
 
   data () {
+    const params = Object.assign({
+      page: 1,
+      rows: 10,
+      filter_by: '',
+      q: '',
+      sort_by: 'order',
+      sort: 'desc',
+      status: 'all'
+    }, this.$route.query
+    )
     return {
-      translations: {},
+      translations,
+      params,
+
+      userId: this.loginId,
+
       modals: {
         test: new this.ModalData({ name: 'asd' })
       },
 
-      amount: 0,
+      searchFor: null,
 
       attachImage: {
         // image: require('@/assets/images/favicon/default.png'),
@@ -191,8 +226,6 @@ export default {
         loginId: null,
         postContent: ''
       },
-
-      tagsArr: [],
 
       searchParams: {
         main: this.$_defaultSearchParams()
@@ -233,9 +266,21 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('posts', [
+      'posts',
+      'count'
+    ])
+  },
+
+  async mounted () {
+    await this.fetchPost()
+  },
+
   methods: {
     ...mapActions('posts', [
-      'createPost'
+      'createPost',
+      'fetchPost'
     ]),
 
     async handleSearch (data) {
@@ -257,7 +302,31 @@ export default {
       }
 
       await this.createPost(data)
-      console.log(data, 'data')
+      this.clear()
+      this.handleFetchPosts()
+    },
+
+    async handleFetchPosts (data) {
+      console.log(data, 'home data')
+      try {
+        const query = data && data.query ? data.query : this.params
+        await this.fetchPost({
+          params: query
+        })
+      } catch (error) {
+        console.log(error)
+        throw error
+      }
+    },
+
+    clear () {
+      this.postDetails.postContent = ''
+    },
+
+    logout () {
+      window.setTimeout(() => {
+        this.$router.push({ name: 'logout' })
+      }, 500)
     }
   }
 }
