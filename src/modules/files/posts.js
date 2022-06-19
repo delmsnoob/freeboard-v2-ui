@@ -1,13 +1,11 @@
 import axios from 'axios'
-import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
 
 export default {
   namespaced: true,
 
   state: {
     posts: [],
-    count: 0,
-    userId: null
+    count: 0
   },
 
   getters: {},
@@ -30,8 +28,6 @@ export default {
 
     async fetchPost ({ commit, state }, params) {
       try {
-        const user = vueLocalStorage.getItem('token')
-        console.log(user, 'user token')
         const response = await axios.get('/posts/fetchPosts', params)
 
         commit('SET_STATE', {

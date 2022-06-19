@@ -27,51 +27,13 @@
     </div>
 
     <div class="main__contents">
-      <!-- <accordion>
-        <template #title>
-          Lorem ipsum
-        </template>
-
-        <template #body>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </template>
-      </accordion> -->
-
       <form-list @submit.prevent="">
         <template #header>
-          <!-- <form-list-layer
-            max-width="300px"
-            position="right"
-          >
-            <form-list-item label="created date">
-              <DateTimePicker
-                mode="date"
-                type="datetime"
-              />
-            </form-list-item>
-
-            <form-list-item label="deleted date">
-              <DateTimePicker
-                mode="date"
-                type="datetime"
-              />
-            </form-list-item>
-
-            <form-list-item
-              label="can't edit data"
-              is-display
-            >
-              lorem
-            </form-list-item>
-
-            <tooltip position="left">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.
-            </tooltip>
-          </form-list-layer> -->
           <form-list-layer label="">
             <h2 class="freeboard-header">
-              Welcome to Freeboard {{ userId }}
+              Welcome to Freeboard {{ postDetails.userId }}
             </h2>
+            <h3>{{ count }} posts</h3>
           </form-list-layer>
         </template>
 
@@ -111,17 +73,24 @@
             >
               <div class="post-header">
                 @{{ item.user_id }}
-                <!-- <timeago
+                <timeago
                   :datetime="item.created_at"
                   :auto-update="60"
-                /> -->
+                />
+                <h4>June 20, 2022</h4>
               </div>
               <div class="post-body">
                 <div v-html="item.post_content"></div>
               </div>
+              <div
+                v-show="showInputReply"
+                class="reply-section"
+              >
+                write a nice reply
+              </div>
 
               <div class="post-footer">
-                <span>12 likes</span>
+                <a @click="openReply(key)">Reply</a>
               </div>
             </form-list-layer>
           </div>
@@ -136,39 +105,25 @@
         </template>
       </form-list>
     </div>
-
-    <modal
-      v-if="modals.test.$status"
-      v-model="modals.test.$status"
-      title="Modal"
-      close-on-outside-click
-      close-on-escape
-      use-max-height
-      :max-width="500"
-      width="60%"
-      @close="modals.test.$reset"
-    >
-      <p v-for="a in 1">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-    </modal>
   </div>
 </template>
 
 <script>
 // vuex || sockets
 import { mapActions, mapState } from 'vuex'
-// lib
 
 // translations || dictionary
 import translations from '@/assets/js/translations/common/home'
 
 // components
-import Accordion from '@/components/base/Accordion'
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
+import swal from '@/assets/js/mixins/base/Swal'
 
 // mixins
 import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
+// lib
+const _isEmpty = require('lodash/isEmpty')
+const _isUndefined = require('lodash/isUndefined')
 
 const SearchBar = () => import('@/components/base/SearchBar')
 const TextArea = () => import('@/components/base/TextArea')
@@ -191,17 +146,15 @@ export default {
     FormListItem,
     TagInput,
     AttachImage,
-    Accordion,
     Tooltip
   },
 
-  // eslint-disable-next-line vue/require-prop-types
-  props: ['loginId'],
+  mixins: [swal],
 
   data () {
     const params = Object.assign({
       page: 1,
-      rows: 10,
+      rows: '',
       filter_by: '',
       q: '',
       sort_by: 'order',
@@ -213,10 +166,13 @@ export default {
       translations,
       params,
 
-      userId: null,
-
       modals: {
         test: new this.ModalData({ name: 'asd' })
+      },
+
+      errors: {
+        url: null,
+        all: null
       },
 
       searchFor: null,
@@ -228,9 +184,11 @@ export default {
       },
 
       postDetails: {
-        loginId: null,
+        userId: null,
         postContent: ''
       },
+
+      showInputReply: false,
 
       searchParams: {
         main: this.$_defaultSearchParams()
@@ -279,6 +237,7 @@ export default {
   },
 
   async mounted () {
+    await this.fetchUserId()
     await this.handleFetchPosts()
   },
 
@@ -302,17 +261,50 @@ export default {
 
     async sendPost () {
       const data = {
-        user_id: this.loginId,
+        user_id: this.postDetails.userId,
         post_content: this.postDetails.postContent
       }
 
+      if (_isEmpty(data.post_content) || _isUndefined(data.post_content)) {
+        const error = () => {
+          this.errors.all = 'Error'
+        }
+
+        this.errors.all = 'Error'
+        return this.$_swal({
+          type: 'error',
+          message: 'Error creating post',
+          title: 'Error',
+          callback: {
+            error
+          }
+        })
+      }
+
       await this.createPost(data)
+
+      const success = () => {
+        this.errors.all = null
+      }
+
+      this.$_swal({
+        type: 'success',
+        message: 'Post successful',
+        title: 'Sucess',
+        callback: {
+          success
+        }
+      })
+
       this.clear()
       this.handleFetchPosts()
     },
 
+    async fetchUserId () {
+      this.postDetails.userId = await vueLocalStorage.getItem('userId')
+    },
+
     async handleFetchPosts (data) {
-      this.userId = vueLocalStorage.getItem('userId')
       try {
         const query = data && data.query ? data.query : this.params
         await this.fetchPost({
@@ -332,6 +324,10 @@ export default {
       window.setTimeout(() => {
         this.$router.push({ name: 'logout' })
       }, 500)
+    },
+
+    openReply (id) {
+      this.showInputReply = !this.showInputReply
     }
   }
 }
