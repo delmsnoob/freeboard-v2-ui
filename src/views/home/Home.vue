@@ -16,6 +16,15 @@
         <template #actions>
           <button
             class="btn-default"
+            @click="showModal"
+          >
+            <span>
+              Add Post
+            </span>
+          </button>
+
+          <button
+            class="btn-default"
             @click="logout"
           >
             <span>
@@ -28,17 +37,17 @@
 
     <div class="main__contents">
       <form-list @submit.prevent="">
-        <template #header>
+        <!-- <template #header>
           <form-list-layer label="">
             <h2 class="freeboard-header">
               Welcome to Freeboard {{ postDetails.userId }}
             </h2>
             <h3>{{ count }} posts</h3>
           </form-list-layer>
-        </template>
+        </template> -->
 
         <template #body>
-          <form-list-layer>
+          <!-- <form-list-layer>
             <Quill
               ref="content"
               v-model="postDetails.postContent"
@@ -64,7 +73,7 @@
               </span>
             </button>
           </div>
-
+ -->
           <div class="posts-body">
             <form-list-layer
               v-for="(item, key) in posts"
@@ -105,6 +114,40 @@
         </template>
       </form-list>
     </div>
+
+    <modal
+      v-if="modals.addPost.$status"
+      v-model="modals.addPost.$status"
+      :title="('Add new post')"
+      class="add-post-modal"
+    >
+      <div class="main__contents">
+        <form-list>
+          <template slot="body">
+            <QuillPosts
+              ref="content"
+              v-model="modals.addPost.data.content"
+              type="content"
+              :placeholder="translate('Write a nice post here...')"
+              :value="modals.addPost.data.content"
+            />
+          </template>
+        </form-list>
+      </div>
+
+      <template slot="footer">
+        <button
+          class="btn-save"
+          @click="sendPost"
+        >
+          <i class="ico-save"> </i>
+
+          <span>
+            {{ translate("save") }}
+          </span>
+        </button>
+      </template>
+    </modal>
   </div>
 </template>
 
@@ -129,7 +172,7 @@ const SearchBar = () => import('@/components/base/SearchBar')
 const TextArea = () => import('@/components/base/TextArea')
 const DateTimePicker = () => import('@/components/base/DateTimePicker')
 const TagInput = () => import('@/components/base/TagInput')
-const Quill = () => import('@/components/base/Quill')
+const QuillPosts = () => import('@/components/base/QuillPosts')
 const AttachImage = () => import('@/components/base/AttachImage')
 const Tooltip = () => import('@/components/base/Tooltip')
 
@@ -140,7 +183,7 @@ export default {
     SearchBar,
     TextArea,
     DateTimePicker,
-    Quill,
+    QuillPosts,
     FormList,
     FormListLayer,
     FormListItem,
@@ -167,7 +210,9 @@ export default {
       params,
 
       modals: {
-        test: new this.ModalData({ name: 'asd' })
+        addPost: new this.ModalData({
+          content: ''
+        })
       },
 
       errors: {
@@ -183,10 +228,7 @@ export default {
         existing: null
       },
 
-      postDetails: {
-        userId: null,
-        postContent: ''
-      },
+      userId: null,
 
       showInputReply: false,
 
@@ -225,7 +267,9 @@ export default {
             display: 'login name'
           }
         ]
-      }
+      },
+
+      status: null
     }
   },
 
@@ -260,9 +304,10 @@ export default {
     },
 
     async sendPost () {
+      const postContent = this.modals.addPost.data
       const data = {
-        user_id: this.postDetails.userId,
-        post_content: this.postDetails.postContent
+        user_id: this.userId,
+        post_content: postContent.content
       }
 
       if (_isEmpty(data.post_content) || _isUndefined(data.post_content)) {
@@ -301,7 +346,7 @@ export default {
     },
 
     async fetchUserId () {
-      this.postDetails.userId = await vueLocalStorage.getItem('userId')
+      this.userId = await vueLocalStorage.getItem('userId')
     },
 
     async handleFetchPosts (data) {
@@ -328,6 +373,10 @@ export default {
 
     openReply (id) {
       this.showInputReply = !this.showInputReply
+    },
+
+    showModal () {
+      this.modals.addPost.$status = true
     }
   }
 }
