@@ -86,7 +86,7 @@
                   :datetime="item.created_at"
                   :auto-update="60"
                 />
-                <h4>June 20, 2022</h4>
+                {{ item.created_at | moment }}
               </div>
               <div class="post-body">
                 <div v-html="item.post_content"></div>
@@ -99,7 +99,7 @@
               </div>
 
               <div class="post-footer">
-                <a @click="openReply(key)">Reply</a>
+                <a @click="openReply">Reply</a>
               </div>
             </form-list-layer>
           </div>
@@ -162,6 +162,9 @@ import translations from '@/assets/js/translations/common/home'
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
 import swal from '@/assets/js/mixins/base/Swal'
 
+// helpers
+import moment from 'moment'
+
 // mixins
 import { vueLocalStorage } from '@/assets/js/mixins/base/VueLocalStorage'
 // lib
@@ -192,6 +195,12 @@ export default {
     Tooltip
   },
 
+  filters: {
+    moment: function (date) {
+      return moment(date).format('MMM DD, YYYY')
+    }
+  },
+
   mixins: [swal],
 
   data () {
@@ -200,9 +209,8 @@ export default {
       rows: '',
       filter_by: '',
       q: '',
-      sort_by: 'order',
-      sort: 'desc',
-      status: 'all'
+      sort_by: 'created_at',
+      sort: 'desc'
     }, this.$route.query
     )
     return {
