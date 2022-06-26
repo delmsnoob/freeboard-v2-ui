@@ -91,16 +91,14 @@
               <div class="post-body">
                 <div v-html="item.post_content"></div>
               </div>
-              <div
-                v-show="showInputReply"
-                class="reply-section"
-              >
-                write a nice reply
-              </div>
+              <Reply
+                :show="showReplySection"
+                @click="selectedPost=item.id"
+              />
 
-              <div class="post-footer">
+              <!-- <div class="post-footer">
                 <a @click="openReply">Reply</a>
-              </div>
+              </div> -->
             </form-list-layer>
           </div>
         </template>
@@ -161,6 +159,7 @@ import translations from '@/assets/js/translations/common/home'
 // components
 import { FormList, FormListLayer, FormListItem } from '@/components/base/form-list'
 import swal from '@/assets/js/mixins/base/Swal'
+import Reply from '@/views/home/reply/Reply'
 
 // helpers
 import moment from 'moment'
@@ -192,7 +191,9 @@ export default {
     FormListItem,
     TagInput,
     AttachImage,
-    Tooltip
+    Tooltip,
+
+    Reply
   },
 
   filters: {
@@ -277,7 +278,11 @@ export default {
         ]
       },
 
-      status: null
+      status: null,
+
+      toggleReply: false,
+      showReplySection: false
+
     }
   },
 
@@ -380,7 +385,7 @@ export default {
     },
 
     openReply (id) {
-      this.showInputReply = !this.showInputReply
+      this.toggleReply = !this.toggleReply
     },
 
     showModal () {
