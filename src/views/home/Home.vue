@@ -93,7 +93,8 @@
               </div>
               <Reply
                 :show="showReplySection"
-                @click="selectedPost=item.id"
+                :selectedPost="item.id"
+                :userId="userId"
               />
 
               <!-- <div class="post-footer">

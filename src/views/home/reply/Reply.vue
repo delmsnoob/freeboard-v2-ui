@@ -5,6 +5,8 @@
         v-model="reply.replyContent"
         placeholder="Write a nice reply"
       />
+      {{ selectedPost }}
+      {{ userId }}
     </div>
 
     <a @click="toggleReply">
@@ -25,7 +27,8 @@ export default {
   },
 
   props: {
-    selectedPost: Number
+    selectedPost: Number,
+    userId: Number
   },
 
   data () {
